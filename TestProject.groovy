@@ -1,3 +1,3 @@
-def printHello() {
-  println "Hello, world!"
+def nunitStep() {
+	println "Hello, world!"
 }
