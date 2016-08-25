@@ -30,7 +30,9 @@ def EchoNode() {
 			
 			stage 'Convert Nunit test results to HTML'
 				// CHANGE EXE NAME BEFORE PROD
-				NunitHtmlStage()
+				def stages = fileLoader.fromGit('TestProject', 
+					'https://github.com/muratzorer/Pipes.git', 'master', null, '')
+				stages.NunitHtmlStage()
 		
 			stage 'Publish Nunit Test Report'
 				publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
@@ -65,10 +67,6 @@ def EchoNode() {
 				build job: 'denemePipe', quietPeriod: 5, wait: false, parameters: [[$class: 'StringParameterValue', name: 'path', value: "C:\\Program Files (x86)\\Jenkins\\jobs\\denemeMultiBranch\\branches\\master\\builds\\${env.BUILD_NUMBER}\\build.xml"]]
 		}
 	}
-}
-
-def NunitHtmlStage(){
-	bat "NUnitHTMLReportGenerator \"C:\\Program Files (x86)\\Jenkins\\workspace\\denemeMultiBranch\\master\\nunit-result.xml\""
 }
 
 return this;
