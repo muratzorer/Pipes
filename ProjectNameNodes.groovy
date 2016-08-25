@@ -1,4 +1,4 @@
-def stages = fileLoader.fromGit('TestProject', 
+def stages = fileLoader.fromGit('ProjectNameStages', 
 	'https://github.com/muratzorer/Pipes.git', 'master', null, '')
 
 def EchoNode() {
