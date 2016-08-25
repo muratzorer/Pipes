@@ -4,3 +4,5 @@ def EchoNode() {
 			echo 'hola'
 	}
 }
+
+return this;
