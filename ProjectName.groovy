@@ -30,7 +30,7 @@ def EchoNode() {
 			
 			stage 'Convert Nunit test results to HTML'
 				// CHANGE EXE NAME BEFORE PROD
-				source.NunitHtmlStage()
+				NunitHtmlStage()
 		
 			stage 'Publish Nunit Test Report'
 				publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
