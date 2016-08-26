@@ -1,6 +1,7 @@
+def stages = fileLoader.fromGit('ProjectNameStages', 
+	'https://github.com/muratzorer/Pipes.git', 'master', null, '')
 
-
-def EchoNode() {
+def Node1() {
 	node { //node('windows') tags
 		wrap([$class: 'TimestamperBuildWrapper']) {
 			stage 'Checkout'
@@ -32,8 +33,6 @@ def EchoNode() {
 			
 			stage 'Convert Nunit test results to HTML'
 				// CHANGE EXE NAME BEFORE PROD
-				def stages = fileLoader.fromGit('ProjectNameStages', 
-					'https://github.com/muratzorer/Pipes.git', 'master', null, '')
 				stages.NunitHtmlStage()
 		
 			stage 'Publish Nunit Test Report'
