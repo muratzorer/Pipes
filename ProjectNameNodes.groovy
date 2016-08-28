@@ -1,5 +1,7 @@
 stages = fileLoader.fromGit('ProjectNameStages', 
 	'https://github.com/muratzorer/Pipes.git', 'master', null, '')
+	
+str = "nuget restore TestApplication.sln"
 
 def Node1() {
 	node { //node('windows') tags
@@ -9,7 +11,7 @@ def Node1() {
 			   checkout scm
 				
 			stage 'Nuget'
-				bat 'nuget restore TestApplication.sln'
+				bat str
 				
 			stage 'MSBuild'
 				timeout(time:60, unit:'SECONDS') {
