@@ -1,7 +1,5 @@
 stages = fileLoader.fromGit('ProjectNameStages', 
 	'https://github.com/muratzorer/Pipes.git', 'master', null, '')
-	
-str = "nuget restore TestApplication.sln"
 
 def Node1() {
 	node { //node('windows') tags
@@ -11,7 +9,7 @@ def Node1() {
 			   checkout scm
 				
 			stage 'Nuget'
-				bat str
+				bat 'nuget restore TestApplication.sln'
 				
 			stage 'MSBuild'
 				timeout(time:60, unit:'SECONDS') {
@@ -41,9 +39,10 @@ def Node1() {
 				publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
 				
 			stage 'SonarQube Analysis'
-				bat 'MSBuild.SonarQube.Runner begin /k:\"TestApplication\" /n:\"Test Application\" /v:1.0.0.%BUILD_NUMBER%'
-				bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild /p:VisualStudioVersion=12.0"
-				bat 'MSBuild.SonarQube.Runner end'
+				// bat 'MSBuild.SonarQube.Runner begin /k:\"TestApplication\" /n:\"Test Application\" /v:1.0.0.%BUILD_NUMBER%'
+				// bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild /p:VisualStudioVersion=12.0"
+				// bat 'MSBuild.SonarQube.Runner end'
+				stages.sonarQubeAnalysis()
 				
 			/*		
 			stage 'Stash and upload build artifacts'
