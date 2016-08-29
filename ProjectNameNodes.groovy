@@ -43,6 +43,7 @@ def Node1() {
 				// bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild /p:VisualStudioVersion=12.0"
 				// bat 'MSBuild.SonarQube.Runner end'
 				stages.sonarQubeAnalysis()
+				//deneme
 				
 			/*		
 			stage 'Stash and upload build artifacts'
