@@ -42,11 +42,7 @@ def Node1() {
 				// bat 'MSBuild.SonarQube.Runner begin /k:\"TestApplication\" /n:\"Test Application\" /v:1.0.0.%BUILD_NUMBER%'
 				// bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild /p:VisualStudioVersion=12.0"
 				// bat 'MSBuild.SonarQube.Runner end'
-				bat 'MSBuild.SonarQube.Runner begin /k:\"TestApplication\" /n:\"Test Application\" /v:1.0.0.%BUILD_NUMBER% /d:sonar.cs.vscoveragexml.reportsPaths=\"%CD%\\VisualStudio.coveragexml\"'
-				bat "\"${tool 'msbuild'}\" TestApplication.sln /t:rebuild /p:VisualStudioVersion=12.0"
-				bat "\"C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\Team Tools\\Dynamic Code Coverage Tools\\CodeCoverage.exe\" collect /output:VisualStudio.coverage \"TestApplication.Tests\\bin\\Release\\TestApplication.Tests.dll\""
-				bat "\"C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\Team Tools\\Dynamic Code Coverage Tools\\CodeCoverage.exe\" analyze /output:VisualStudio.coveragexml VisualStudio.coverage"
-				bat 'MSBuild.SonarQube.Runner end'
+				stages.sonarQubeAnalysis()
 				
 			/*		
 			stage 'Stash and upload build artifacts'
