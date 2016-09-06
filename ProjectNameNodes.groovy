@@ -38,9 +38,12 @@ def Node1() {
 			stage 'Convert Nunit test results to HTML'
 				// CHANGE EXE NAME BEFORE PROD
 				stages.NunitHtmlStage()
+				
+			stage 'Generate Code Coverage Reports'
+				stages.generateCoverageReports()
 		
-			stage 'Publish Nunit Test Report'
-				publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
+			// stage 'Publish Nunit Test Report'
+				// publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
 				
 			/*		
 			stage 'Stash and upload build artifacts'
