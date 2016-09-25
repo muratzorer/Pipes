@@ -41,6 +41,9 @@ def Node1() {
 				
 			stage 'Generate Code Coverage Reports'
 				stages.generateCoverageReports()
+				
+			stage 'Upload Test Results To HP ALM'
+				stages.uploadTestsToALM()
 		
 			// stage 'Publish Nunit Test Report'
 				// publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '', reportFiles: 'nunit-result.html', reportName: 'Nunit Test Results'])
